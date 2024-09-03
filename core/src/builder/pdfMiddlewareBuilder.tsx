@@ -11,9 +11,9 @@ export type RootDataExtractor<Data> = <
   ReqBody,
   ResBody,
   QueryParams,
-  Locals extends Record<string, unknown>
+  Locals extends Record<string, unknown>,
 >(
-  req: Request<Params, ReqBody, ResBody, QueryParams, Locals>
+  req: Request<Params, ReqBody, ResBody, QueryParams, Locals>,
 ) => Data & JSX.IntrinsicAttributes;
 
 /**
@@ -26,13 +26,13 @@ export type PDFGenerator = <
   ReqBody,
   ResBody,
   QueryParams,
-  Locals extends Record<string, unknown>
+  Locals extends Record<string, unknown>,
 >(
   Content: (data: ContentData) => ReactElement,
   contentDataExtractor: (
-    req: Request<Params, ReqBody, ResBody, QueryParams, Locals>
+    req: Request<Params, ReqBody, ResBody, QueryParams, Locals>,
   ) => ContentData & JSX.IntrinsicAttributes,
-  fileName?: string
+  fileName?: string,
 ) => RequestHandler<Params, ReqBody, ResBody, QueryParams, Locals>;
 
 /**
@@ -40,7 +40,7 @@ export type PDFGenerator = <
  */
 export type PDFMiddlewareBuilder = <RootData>(
   Root: (data: RootData) => ReactElement,
-  rootDataExtractor: RootDataExtractor<RootData>
+  rootDataExtractor: RootDataExtractor<RootData>,
 ) => PDFGenerator;
 
 /**
@@ -52,7 +52,7 @@ export type PDFMiddlewareBuilder = <RootData>(
  */
 export const pdfMiddlewareBuilder: PDFMiddlewareBuilder = (
   Root,
-  rootDataExtractor
+  rootDataExtractor,
 ) => {
   return (Content, contentDataExtractor, fileName = "export.pdf") => {
     return async (req, res, next) => {
@@ -61,7 +61,7 @@ export const pdfMiddlewareBuilder: PDFMiddlewareBuilder = (
         {
           Root,
           rootData: rootDataExtractor(req),
-        }
+        },
       );
 
       // Setting up the response headers
