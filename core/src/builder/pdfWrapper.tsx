@@ -3,7 +3,7 @@ import { renderToStream } from "@react-pdf/renderer";
 
 export type PDFWrapperData = <
   ContentData extends JSX.IntrinsicAttributes,
-  RootData
+  RootData,
 >(
   content: {
     Content: (data: ContentData) => ReactElement;
@@ -12,7 +12,7 @@ export type PDFWrapperData = <
   root: {
     Root: (data: RootData) => ReactElement;
     rootData: RootData;
-  }
+  },
 ) => Promise<NodeJS.ReadableStream>;
 
 /**
@@ -23,10 +23,10 @@ export type PDFWrapperData = <
  */
 export const pdfWrapper: PDFWrapperData = (
   { Content, contentData },
-  { Root, rootData }
+  { Root, rootData },
 ) =>
   renderToStream(
     <Root {...rootData}>
       <Content {...contentData}></Content>
-    </Root>
+    </Root>,
   );

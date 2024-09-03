@@ -34,7 +34,7 @@ router.get(
   basePDFGenerator(Certificate, (req) => ({
     name: req.query.name,
     age: req.query.age,
-  }))
+  })),
 );
 ```
 
@@ -70,6 +70,6 @@ export const i18NextPDFMiddleware = pdfMiddlewareBuilder(
   I18NextRootContext,
   (req) => ({
     translate: req.i18n,
-  })
+  }),
 );
 ```

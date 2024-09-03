@@ -3,5 +3,5 @@ import { pdfMiddlewareBuilder } from "../builder/pdfMiddlewareBuilder";
 
 export const basePDFGenerator = pdfMiddlewareBuilder(
   BaseRootContext,
-  () => ({})
+  () => ({}),
 );
